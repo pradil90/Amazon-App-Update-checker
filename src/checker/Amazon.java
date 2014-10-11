@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-package amazon;
+package checker;
 
 import java.io.*;
 import java.lang.*;
@@ -22,7 +16,16 @@ public class Amazon {
      
     /**
      * @param args the command line arguments
+     * 
      */
+	static String data;
+	static String appversion;
+	public static void checkalert()
+	{
+		 SendEmail connector=new SendEmail();
+		 connector.mail(Amazon.data,Amazon.appversion);
+		 System.out.println(Amazon.data);
+	}
     public static void main(String[] args) {
         
         String inputLine;
@@ -41,6 +44,7 @@ public class Amazon {
                  Scanner scanner = new Scanner( System.in );
                  String input = scanner.nextLine();
                  System.out.println( "input = " + input );
+                 appversion=input;
 		try 
 		{
 			//Creating URL object specified.
@@ -60,7 +64,7 @@ public class Amazon {
             
 			while ((inputLine = dis.readLine()) != null)
 			{
-				System.out.println(inputLine);
+//				System.out.println(inputLine);
                                 String searchStr = inputLine;
                             int indexOf = searchStr.indexOf("Version:");
                             if (indexOf > 0)
@@ -83,6 +87,8 @@ public class Amazon {
                 
 		String result=lineresult.replaceAll("\\<.*?>","");
                 System.out.println("Latest Version:"+result);
+                data=result;
+                checkalert();
 			
 		}
 	
