@@ -1,7 +1,7 @@
 package checker;
 
 import java.util.Properties;
-
+import java.util.Date;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -11,11 +11,9 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
  
 public class SendEmail {
-	
-	
-	public void mail(String data,String appversion){
- 
-//	public static void main(String[] args) {
+		
+	public void mail(){
+
  
 		final String username = "versionchecker1@gmail.com";
 		final String password = "version@123";
@@ -34,18 +32,27 @@ public class SendEmail {
 		  });
  
 		try {
+			Date date=new Date();
+			String rundate=date.toString();
+			
  
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("Amazon-checker@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO,
 				InternetAddress.parse("pradil90@gmail.com"));
-//			message.setRecipients(Message.RecipientType.CC,
-//					InternetAddress.parse("rinitageorge@gmail.com"));
-			message.setSubject("Testing Subject");
+
+			message.setSubject("Amazon version checker tool report | " + rundate);
 			message.setText("Dear viewer,"
-				+ "\n\n This is a test mail for Amazon Tool checker Version1.1\n\n"
-					+ "Current version for the App:" + appversion + "\n\n" + data
-					+ "\n\nThank and Regards" + "\nAmazon version checker Team");
+				+ "\n\n This is an automated mail alert from Amazon Version checker Tool  Version2.0\n\n"
+					+ Amazon.facebookresult + "\n" 
+				    + Amazon.netflixresult + "\n" 
+				    + Amazon.youtuberesult + "\n" 
+				    + Amazon.rokuresult + "\n"
+				    + Amazon.twitterresult + "\n"
+				    + Amazon.pandoraresult + "\n"
+					+ "\n\nThanks and Regards" + "\nAmazon version checker Team");
+			
+
  
 			Transport.send(message);
  
@@ -56,5 +63,5 @@ public class SendEmail {
 		}
 	}
 }
-//}
+
 
