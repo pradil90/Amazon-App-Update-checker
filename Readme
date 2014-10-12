@@ -4,5 +4,12 @@ Amazon Version Checker Tool 2.0
 
     The tool can be used to monitor a list of amazon android apps for new version releases.The app generates a report of app list and details of the version updates.
     
+    Requirements:
+    
+    -Java JDK 1.7 or eclipse Kepler 3.5 or above.
+    
+    
+    
+    
     
     
