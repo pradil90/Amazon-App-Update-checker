@@ -10,7 +10,7 @@ import java.io.*;
 import java.io.ObjectInputStream.GetField;
 import java.lang.*;
 import java.net.*;
-import java.util.Scanner;
+import java.util.*;
 import java.util.regex.*;
 import java.util.StringTokenizer;
 
@@ -38,11 +38,14 @@ public class Amazon {
 	 static String twitterver,twittercurrent;
 	 static String pandoraver,pandoracurrent;
 	 static String updatecheck;
+	 
+	 
+
 	
-    public static void main(String[] args) {
+//    public static void main(String[] args) {
         
-        
-        
+	 public static void tasker(){
+    	
        
                 System.out.println("List of Amazon Apps supported by Amazon Version Checker tool Version.1.2:");
               
@@ -64,7 +67,7 @@ public class Amazon {
                 rokuver="Version: 3.1.4.2117542";
                 
                 System.out.println("[5] Twitter  : http://www.amazon.com/Twitter-Inc/dp/B004SOR4H6");
-                twitter=new URLhandler("http://www.amazon.com/Twitter-Inc/dp/B004SOR4H6","netflix");
+                twitter=new URLhandler("http://www.amazon.com/Twitter-Inc/dp/B004SOR4H6","twitter");
                 twitterver="Version: 5.29.0";
                 
                 
@@ -116,11 +119,11 @@ public class Amazon {
                 Latestversion=connector(pandora.getAppURL());
                 pandora=new URLhandler(pandora.getAppName(),pandora.getAppURL(),Latestversion);
                 pandoracurrent=pandora.getLatestVersion();
-                 updateflag=comparator(facebookver,facebookcurrent);
+                 updateflag=comparator(pandoraver,pandoracurrent);
                 pandoraresult="App name:" + pandora.getAppName() + "  " +  pandora.getLatestVersion() + "  " +  updateflag;
                 System.out.println( pandoraresult );
                
-                facebook.checkalert();
+//                facebook.checkalert();
                 
                 
                 

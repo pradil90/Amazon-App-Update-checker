@@ -11,12 +11,14 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
  
 public class SendEmail {
+	
+
 		
 	public void mail(){
 
  
-		final String username = "Your-mail@gmail.com";
-		final String password = "password";
+		final String username = "versionchecker1@gmail.com";
+		final String password = "version@123";
  
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
