@@ -1,25 +1,27 @@
 package checker;
 
+
 public class URLhandler {
 	
-	public String AppURl;
-	public String Appname;
-	public String currentVersion;
+	private String AppURl;
+	private String Appname;
+	private String currentVersion;
 	
-	
+	//Default constructor initialized with default values//
 	URLhandler()
 	{
 		AppURl="";
 		Appname="";
 	}
 		
+	//Initializing constructor with arguments//
 	URLhandler(String URLname,String appName)
 	{
 		AppURl=URLname;
 		Appname=appName;
 	}
 	
-	
+	//Constructor initialized when three arguments is used//
 	URLhandler(String URLname,String appname,String Latestversion)
 	{
 		AppURl=appname;
@@ -27,7 +29,7 @@ public class URLhandler {
 		currentVersion=Latestversion;
 	}
 	
-	
+	//Function to send the report to mail//
 	public void checkalert()
 	{
 		 SendEmail connector=new SendEmail();

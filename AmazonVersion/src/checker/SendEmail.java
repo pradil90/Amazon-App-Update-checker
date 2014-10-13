@@ -20,12 +20,14 @@ public class SendEmail {
 		final String username = "versionchecker1@gmail.com";
 		final String password = "version@123";
  
+		//Mail properties setting//
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
 		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.port", "587");
- 
+		
+		//Mail user authentication//
 		Session session = Session.getInstance(props,
 		  new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
@@ -34,16 +36,20 @@ public class SendEmail {
 		  });
  
 		try {
+			//Current time//
 			Date date=new Date();
 			String rundate=date.toString();
 			
  
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("Amazon-checker@gmail.com"));
+			
+			//Setting recipient for the report//
 			message.setRecipients(Message.RecipientType.TO,
 				InternetAddress.parse("pradil90@gmail.com"));
-
+			//Setting suject line//
 			message.setSubject("Amazon version checker tool report | " + rundate);
+			//Setting the report data//
 			message.setText("Dear viewer,"
 				+ "\n\n This is an automated mail alert from Amazon Version checker Tool  Version2.0\n\n"
 					+ Amazon.facebookresult + "\n" 
@@ -55,11 +61,12 @@ public class SendEmail {
 					+ "\n\nThanks and Regards" + "\nAmazon version checker Team");
 			
 
- 
+			//sending generated Message//
 			Transport.send(message);
  
 			System.out.println("Successfully sent");
- 
+			
+			//Error handling//
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
 		}

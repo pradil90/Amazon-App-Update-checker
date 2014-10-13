@@ -31,12 +31,12 @@ public class Amazon {
 	static URLhandler facebook,netflix,roku,youtube,twitter,pandora,mailer;
 	static String facebookresult,netflixresult,youtuberesult,rokuresult,twitterresult,pandoraresult;
 	 static boolean result;
-	 static String facebookver,facebookcurrent;
-	 static String netflixver, netflixcurrent;
-	 static String rokuver, rokucurrent;
-	 static String youtubever,youtubecurrent;
-	 static String twitterver,twittercurrent;
-	 static String pandoraver,pandoracurrent;
+	 static String facebookver,facebookcurrent,Latestfacebook;
+	 static String netflixver, netflixcurrent,Latestneflix;
+	 static String rokuver, rokucurrent,latestroku;
+	 static String youtubever,youtubecurrent,latestyoutube;
+	 static String twitterver,twittercurrent,latesttwitter;
+	 static String pandoraver,pandoracurrent,latestpandora;
 	 static String updatecheck;
 	 
 	 
@@ -75,59 +75,56 @@ public class Amazon {
                 pandora=new URLhandler("http://www.amazon.com/Pandora-Media/dp/B005V1N71W","Pandora");
                 pandoraver="Version: 5.4";
                 
-                //Facebook//
-                Latestversion=connector(facebook.getAppURL());
-                facebook=new URLhandler(facebook.getAppName(),facebook.getAppURL(),Latestversion);
+                //Running version check for App-Facebook//
+                Latestfacebook=connector(facebook.getAppURL());
+                facebook=new URLhandler(facebook.getAppName(),facebook.getAppURL(),Latestfacebook);
                 facebookcurrent=facebook.getLatestVersion();
                  updateflag=comparator(facebookver,facebookcurrent);
                 facebookresult="App name:" + facebook.getAppName() + "  " +  facebook.getLatestVersion() + "  " +  updateflag;
                 System.out.println( facebookresult );
                
-                //Netflix//
-                Latestversion=connector(netflix.getAppURL());
-                netflix=new URLhandler(netflix.getAppName(),netflix.getAppURL(),Latestversion);
+                //Running version check for App-Netflix//
+                Latestneflix=connector(netflix.getAppURL());
+                netflix=new URLhandler(netflix.getAppName(),netflix.getAppURL(),Latestneflix);
                 netflixcurrent=netflix.getLatestVersion();
                  updateflag=comparator(netflixver,netflixcurrent);
                 netflixresult="App name:" + netflix.getAppName() + "  " +  netflix.getLatestVersion() + "  " +  updateflag;
                 System.out.println( netflixresult );
 
-                //You tube//
-                Latestversion=connector(youtube.getAppURL());
-                youtube=new URLhandler(youtube.getAppName(),youtube.getAppURL(),Latestversion);
+                //Running version check for App-You tube//
+                latestyoutube=connector(youtube.getAppURL());
+                youtube=new URLhandler(youtube.getAppName(),youtube.getAppURL(),latestyoutube);
                 youtubecurrent=youtube.getLatestVersion();
                  updateflag=comparator(youtubever,youtubecurrent);
                 youtuberesult="App name:" + youtube.getAppName() + "  " +  youtube.getLatestVersion() + "  " +  updateflag;
                 System.out.println( youtuberesult );
          
-                //Roku//
-                Latestversion=connector(roku.getAppURL());
-                roku=new URLhandler(roku.getAppName(),roku.getAppURL(),Latestversion);
+                //Running version check for App-Roku//
+                latestroku=connector(roku.getAppURL());
+                roku=new URLhandler(roku.getAppName(),roku.getAppURL(),latestroku);
                 rokucurrent=roku.getLatestVersion();
                  updateflag=comparator(rokuver,rokucurrent);
                 rokuresult="App name:" + roku.getAppName() + "  " +  roku.getLatestVersion() + "  " +  updateflag;
                 System.out.println( rokuresult );
                 
-                //Twitter//
-                Latestversion=connector(twitter.getAppURL());
-                twitter=new URLhandler(twitter.getAppName(),twitter.getAppURL(),Latestversion);
+                //Running version check for App-Twitter//
+                latesttwitter=connector(twitter.getAppURL());
+                twitter=new URLhandler(twitter.getAppName(),twitter.getAppURL(),latesttwitter);
                 twittercurrent=twitter.getLatestVersion();
                  updateflag=comparator(twitterver,twittercurrent);
                 twitterresult="App name:" + twitter.getAppName() + "  " +  twitter.getLatestVersion() + "  " +  updateflag;
                 System.out.println( twitterresult );
                 
-                //Pandora//
-                Latestversion=connector(pandora.getAppURL());
-                pandora=new URLhandler(pandora.getAppName(),pandora.getAppURL(),Latestversion);
+                //Running version check for App-Pandora//
+                latestpandora=connector(pandora.getAppURL());
+                pandora=new URLhandler(pandora.getAppName(),pandora.getAppURL(),latestpandora);
                 pandoracurrent=pandora.getLatestVersion();
                  updateflag=comparator(pandoraver,pandoracurrent);
                 pandoraresult="App name:" + pandora.getAppName() + "  " +  pandora.getLatestVersion() + "  " +  updateflag;
                 System.out.println( pandoraresult );
                
 //                facebook.checkalert();
-                
-                
-                
-                 
+                  
     }         
                  
      public static String connector(String URLinput)
@@ -160,7 +157,7 @@ public class Amazon {
                         System.out.println();
                         lineresult=inputLine;
                   	dis.close();
-		}
+		}//Error handling for URL and IO exceptions//
         catch (MalformedURLException me)
 		{
 			System.out.println("MalformedURLException: " + me);
@@ -175,33 +172,38 @@ public class Amazon {
 		return data;
     }	
      
+     //Function to extract version details from the buffer//
      public static String trimmer(String lineresult){
                 
 		String result=lineresult.replaceAll("\\<.*?>","");
+				//Removing extra white spaces//
 				String result2=result.trim();
                 System.out.println("Latest "+result.trim());
                
                 return result2;
      }      
-                
+       
+     //Function to check version change//
 	public static String comparator(String inp1,String inp2)
 	{
 		
 		System.out.println(inp1);
 		System.out.println(inp2);
+		if(inp2!=null){
 		result=inp1.equals(inp2);
 		System.out.println(result);
-		if(result){
-			updatecheck="Already Upto date";
 		}else{
-			updatecheck="New version AVAILABLE";
+			updatecheck="Server error:check in next run";
+			return updatecheck;
+		}
+		
+		if(result){
+			updatecheck="Upto date!!";
+		}else{
+			updatecheck="New version AVAILABLE!!";
 		}
 		return updatecheck;
 	}
-		
-	
-    
-  
 }//End of class Amazon//
 
 
