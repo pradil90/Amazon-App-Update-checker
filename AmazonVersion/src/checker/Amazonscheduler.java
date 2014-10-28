@@ -28,7 +28,7 @@ public class Amazonscheduler {
 	}
  
 	public static void main(String args[]) {
-		new Amazonscheduler(180);
+		new Amazonscheduler(360);
 		System.out.format("Task scheduled....Monitoring set to every 3 minutes%n");
 	}
 }

@@ -23,7 +23,7 @@ import static java.lang.System.exit;
 public class Amazon {
      
     
-	static String Latestversion;
+	 String Latestversion="";
 	static String data;
 	static String inputLine;
 	static String lineresult="";
@@ -76,15 +76,22 @@ public class Amazon {
                 pandoraver="Version: 5.4";
                 
                 //Running version check for App-Facebook//
+                while(Latestfacebook==null){
                 Latestfacebook=connector(facebook.getAppURL());
+                }
                 facebook=new URLhandler(facebook.getAppName(),facebook.getAppURL(),Latestfacebook);
                 facebookcurrent=facebook.getLatestVersion();
                  updateflag=comparator(facebookver,facebookcurrent);
+                 
+                	 
+                
                 facebookresult="App name:" + facebook.getAppName() + "  " +  facebook.getLatestVersion() + "  " +  updateflag;
                 System.out.println( facebookresult );
                
                 //Running version check for App-Netflix//
+                while(Latestneflix==null){
                 Latestneflix=connector(netflix.getAppURL());
+                }
                 netflix=new URLhandler(netflix.getAppName(),netflix.getAppURL(),Latestneflix);
                 netflixcurrent=netflix.getLatestVersion();
                  updateflag=comparator(netflixver,netflixcurrent);
@@ -92,7 +99,9 @@ public class Amazon {
                 System.out.println( netflixresult );
 
                 //Running version check for App-You tube//
+                while(latestyoutube==null){
                 latestyoutube=connector(youtube.getAppURL());
+                }
                 youtube=new URLhandler(youtube.getAppName(),youtube.getAppURL(),latestyoutube);
                 youtubecurrent=youtube.getLatestVersion();
                  updateflag=comparator(youtubever,youtubecurrent);
@@ -100,7 +109,9 @@ public class Amazon {
                 System.out.println( youtuberesult );
          
                 //Running version check for App-Roku//
+                while(latestroku==null){
                 latestroku=connector(roku.getAppURL());
+                }
                 roku=new URLhandler(roku.getAppName(),roku.getAppURL(),latestroku);
                 rokucurrent=roku.getLatestVersion();
                  updateflag=comparator(rokuver,rokucurrent);
@@ -108,7 +119,9 @@ public class Amazon {
                 System.out.println( rokuresult );
                 
                 //Running version check for App-Twitter//
+                while(latesttwitter==null){
                 latesttwitter=connector(twitter.getAppURL());
+                }
                 twitter=new URLhandler(twitter.getAppName(),twitter.getAppURL(),latesttwitter);
                 twittercurrent=twitter.getLatestVersion();
                  updateflag=comparator(twitterver,twittercurrent);
@@ -116,14 +129,16 @@ public class Amazon {
                 System.out.println( twitterresult );
                 
                 //Running version check for App-Pandora//
+                while(latestpandora==null){
                 latestpandora=connector(pandora.getAppURL());
+                }
                 pandora=new URLhandler(pandora.getAppName(),pandora.getAppURL(),latestpandora);
                 pandoracurrent=pandora.getLatestVersion();
                  updateflag=comparator(pandoraver,pandoracurrent);
                 pandoraresult="App name:" + pandora.getAppName() + "  " +  pandora.getLatestVersion() + "  " +  updateflag;
                 System.out.println( pandoraresult );
                
-//                facebook.checkalert();
+                facebook.checkalert();
                   
     }         
                  
@@ -156,6 +171,7 @@ public class Amazon {
                         System.out.println();
                         System.out.println();
                         lineresult=inputLine;
+                        data=trimmer(lineresult);
                   	dis.close();
 		}//Error handling for URL and IO exceptions//
         catch (MalformedURLException me)
@@ -165,9 +181,10 @@ public class Amazon {
 		catch (IOException ioe)
 		{
 			System.out.println("IOException: " + ioe);
+			data=null;
 		}
 		
-		data=trimmer(lineresult);
+		
 		
 		return data;
     }	
